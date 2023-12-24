@@ -18,7 +18,7 @@ type AccordionContextType = {
 }
 
 /** Context */
-const AccortionContext = createContext({} as AccordionContextType)
+const AccordionContext = createContext({} as AccordionContextType)
 
 /** Props */
 type AccordionRootProps = {
@@ -49,16 +49,16 @@ export function AccordionRoot({ children }: AccordionRootProps) {
     }
 
     return (
-        <AccortionContext.Provider value={{ items, addItem, toggle }}>
+        <AccordionContext.Provider value={{ items, addItem, toggle }}>
             <AccordionWrapper>
                 {children}
             </AccordionWrapper>
-        </AccortionContext.Provider>
+        </AccordionContext.Provider>
     )
 }
 
 export function useAccordion() {
-    return useContext(AccortionContext);
+    return useContext(AccordionContext);
 }
 
 
