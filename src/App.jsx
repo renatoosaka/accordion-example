@@ -8,6 +8,7 @@ function App() {
   return (
     <div>
       <Accordion.Root>
+        <h1>Nataniel</h1>
         <Accordion.Item>
           <Accordion.Button>Button 1</Accordion.Button>
           <Accordion.Content>

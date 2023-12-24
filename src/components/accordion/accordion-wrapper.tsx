@@ -18,7 +18,7 @@ export function AccordionWrapper({ children }: AccordionWrapperProps) {
     const { addItem } = useAccordion()
     
     const accordionItemComponents = useMemo(() => {
-        return Children.map(children, (child, index) => {
+        return Children.map(children, (child) => {
             if (!isValidElement(child)) return;
             
             const childComponent = child.type as ComponentType;

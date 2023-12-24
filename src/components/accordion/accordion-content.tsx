@@ -20,7 +20,7 @@ export function AccordionContent({ children, ...props }: Props) {
     }, [items, accordionId])
 
     const accordionContentComponents = useMemo(() => {
-        return Children.map(children, (child, index) => {
+        return Children.map(children, (child) => {
             if (!isValidElement(child)) return child;
             
             const childComponent = child.type as ComponentType;

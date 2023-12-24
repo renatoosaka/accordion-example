@@ -17,7 +17,7 @@ export function AccordionItem({ children, ...props }: Props) {
             }}
             {...props}
         >
-            {Children.map(children, (child, index) => {
+            {Children.map(children, (child) => {
                 if (!isValidElement(child)) return;
                 
                 const childComponent = child.type as ComponentType;
