@@ -7,10 +7,15 @@ import React, {
     ReactNode, 
     cloneElement, 
     isValidElement, 
-    useEffect, 
-    useMemo 
+    useEffect,
+    useRef
 } from 'react'
+
+/** Hooks */
 import { useAccordion } from './accordion-root'
+
+/** Utils */
+import { generateId } from './accordion-utils'
 
 /** Props */
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -19,19 +24,22 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 
 const ALLOWED_CHILD_COMPONENT = ['AccordionButton', 'AccordionContent'] 
 
-export function AccordionItem({ children, ...props }: Props) {
+export function AccordionItem({ children, ...props }: Props) {    
     const { addItem } = useAccordion()
-    const accordionId = useMemo(() => props["data-accordion-id"], [props]);
+    const accordionId = useRef<string>('');
 
     useEffect(() => {
+        accordionId.current = generateId()
+
         addItem({
-            id: accordionId,
+            id: accordionId.current,
             isExpanded: true
         })
     }, [])
     
     return (
         <div
+            data-accordion-id={accordionId.current}
             style={{
                 padding: '16px',
                 paddingRight: '4px'
@@ -46,7 +54,7 @@ export function AccordionItem({ children, ...props }: Props) {
                 if (!ALLOWED_CHILD_COMPONENT.includes(childComponent.name)) return;
 
                 return cloneElement(child as ReactElement, {
-                    "data-accordion-id": props["data-accordion-id"]
+                    "data-accordion-id": accordionId.current
                 });
             })}
         </div>

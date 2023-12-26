@@ -9,9 +9,6 @@ import React, {
     useMemo 
 } from "react"
 
-/** Utils */
-import { generateId } from "./accordion-utils"
-
 /** Props */
 type AccordionWrapperProps = {
     children: ReactNode
@@ -28,10 +25,7 @@ export function AccordionWrapper({ children }: AccordionWrapperProps) {
 
             if (!ALLOWED_CHILD_COMPONENT.includes(childComponent.name)) return;
 
-            return cloneElement(child as ReactElement, {
-                "data-accordion-id": generateId(),
-                
-            });
+            return cloneElement(child);            
         })
     }, [children])
  
