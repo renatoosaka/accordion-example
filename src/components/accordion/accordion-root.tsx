@@ -1,5 +1,10 @@
 /** React */
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import React, { 
+    ReactNode, 
+    createContext, 
+    useContext, 
+    useState 
+} from 'react'
 
 /** Wrapper */
 import { AccordionWrapper } from './accordion-wrapper';
@@ -26,26 +31,26 @@ type AccordionRootProps = {
 }
 
 export function AccordionRoot({ children }: AccordionRootProps) {
-    const [items, setItems] = useState<Record<string, Item>>({})
+   const [items, setItems] = useState<Record<string, Item>>({})
 
-    const addItem = (item: Item) => {
+    const addItem = (item: Item) => { 
         setItems((state) => ({
-            ...state,
-            [item.id]: {
-                ...item,
-                isExpanded: true
-            }
+           ...state,
+           [item.id]: {
+               ...item,
+               isExpanded: true
+           }
         }))
     }
 
     const toggle = (id: string) => {
-        setItems({
-            ...items,
+        setItems((state) => ({
+            ...state ,
             [id]: {
-                ...items[id],
-                isExpanded: !items[id].isExpanded
+                ...state[id],
+                isExpanded: !state[id].isExpanded
             }
-        })
+        }))
     }
 
     return (

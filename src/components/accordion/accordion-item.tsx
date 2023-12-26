@@ -1,5 +1,16 @@
 /** React */
-import React, { Children, ComponentType, HtmlHTMLAttributes, ReactElement, ReactNode, cloneElement, isValidElement } from 'react'
+import React, { 
+    Children, 
+    ComponentType, 
+    HtmlHTMLAttributes, 
+    ReactElement, 
+    ReactNode, 
+    cloneElement, 
+    isValidElement, 
+    useEffect, 
+    useMemo 
+} from 'react'
+import { useAccordion } from './accordion-root'
 
 /** Props */
 type Props = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -9,6 +20,16 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 const ALLOWED_CHILD_COMPONENT = ['AccordionButton', 'AccordionContent'] 
 
 export function AccordionItem({ children, ...props }: Props) {
+    const { addItem } = useAccordion()
+    const accordionId = useMemo(() => props["data-accordion-id"], [props]);
+
+    useEffect(() => {
+        addItem({
+            id: accordionId,
+            isExpanded: true
+        })
+    }, [])
+    
     return (
         <div
             style={{

@@ -1,5 +1,14 @@
 /** React */
-import React, { Children, ComponentType, HtmlHTMLAttributes, ReactElement, ReactNode, cloneElement, isValidElement, useMemo } from 'react'
+import React, { 
+    Children, 
+    ComponentType, 
+    HtmlHTMLAttributes, 
+    ReactElement, 
+    ReactNode, 
+    cloneElement, 
+    isValidElement, 
+    useMemo 
+} from 'react'
 
 /** Hook */
 import { useAccordion } from './accordion-root'
@@ -13,7 +22,7 @@ type Props = HtmlHTMLAttributes<HTMLDivElement> & {
 }
 
 export function AccordionContent({ children, ...props }: Props) {
-    const { addItem, items } = useAccordion()
+    const { items } = useAccordion()
     const accordionId = useMemo(() => props["data-accordion-id"], [props]);
     const isExpanded = useMemo(() => {
         return items[accordionId]?.isExpanded || false
@@ -29,15 +38,8 @@ export function AccordionContent({ children, ...props }: Props) {
 
             const elementProps = {}
             if (isAccordionItem) {
-                const id = generateId();
-    
-                addItem({
-                    id,
-                    isExpanded: true
-                })
-
                 Object.assign(elementProps, {
-                    "data-accordion-id": id,
+                    "data-accordion-id": generateId(),
                 })
             }
             

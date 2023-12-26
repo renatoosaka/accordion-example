@@ -1,8 +1,13 @@
 /** React */
-import React, { Children, ComponentType, ReactElement, ReactNode, cloneElement, isValidElement, useMemo } from "react"
-
-/** Provider */
-import { useAccordion } from "./accordion-root"
+import React, { 
+    Children, 
+    ComponentType, 
+    ReactElement, 
+    ReactNode, 
+    cloneElement, 
+    isValidElement, 
+    useMemo 
+} from "react"
 
 /** Utils */
 import { generateId } from "./accordion-utils"
@@ -15,8 +20,6 @@ type AccordionWrapperProps = {
 const ALLOWED_CHILD_COMPONENT = ['AccordionItem'] 
 
 export function AccordionWrapper({ children }: AccordionWrapperProps) {
-    const { addItem } = useAccordion()
-    
     const accordionItemComponents = useMemo(() => {
         return Children.map(children, (child) => {
             if (!isValidElement(child)) return;
@@ -25,15 +28,8 @@ export function AccordionWrapper({ children }: AccordionWrapperProps) {
 
             if (!ALLOWED_CHILD_COMPONENT.includes(childComponent.name)) return;
 
-            const id = generateId();
-
-            addItem({
-                id,
-                isExpanded: true
-            })
-            
             return cloneElement(child as ReactElement, {
-                "data-accordion-id": id,
+                "data-accordion-id": generateId(),
                 
             });
         })
